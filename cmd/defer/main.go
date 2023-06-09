@@ -1,10 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	// "io"
+	// "os"
+	"strings"
+)
 
 func main() {
-	defer fmt.Println("the functions that have defer keyword before their names, are added onto a stack.")
-	defer fmt.Println("when the enclosing function returns, the stack is called.")
-	defer fmt.Println("being a stack, the last function in, is the first one to be executed.")
-	fmt.Println("Hello World")
+	url := "https://github.com"
+	protocol, domain := urlCutter(url)
+	// createAndWrite("test", protocol, domain)
 }
+
+func urlCutter(url string) (string, string) {
+	protocol, domain, found := strings.Cut(url, "://")
+	defer fmt.Println("found:", found)
+	return "protocol: " + protocol, "domain: " + domain
+}
+
+// func createAndWrite(filename string, text ...string) error {
+// 	stringToWrite := strings.Join(text, "\n")
+// 	filepath := "static/" + filename + ".txt"
+// 	fmt.Println(filepath)
+//
+// 	var err error
+// 	filePointer, err := os.Create(filepath)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	_, err = io.WriteString(filePointer, stringToWrite)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	defer filePointer.Close()
+// 	return filePointer.Close()
+// }
